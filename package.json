@@ -1,0 +1,35 @@
+{
+  "name": "domi-seasonal-h5",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "node server.mjs",
+    "preview": "node server.mjs",
+    "tcb:prepare": "node scripts/prepare-tcb-env.mjs",
+    "tcb:login": "npx --yes -p @cloudbase/cli@latest tcb login",
+    "tcb:build": "NEXT_PUBLIC_RESERVATION_ENDPOINT=${NEXT_PUBLIC_RESERVATION_ENDPOINT:-https://$TCB_ENV_ID.service.tcloudbase.com/api/reservations} NEXT_PUBLIC_WORLDCUP_DESK_ENDPOINT=${NEXT_PUBLIC_WORLDCUP_DESK_ENDPOINT:-https://$TCB_ENV_ID.service.tcloudbase.com/api/worldcup-desk} next build",
+    "tcb:route:http": "node scripts/sync-tcb-routes.mjs",
+    "tcb:route:function": "npm run tcb:route:http",
+    "tcb:deploy:function:only": "npx --yes -p @cloudbase/cli@latest tcb fn deploy domiReservations --httpFn --force --yes",
+    "tcb:deploy:hosting:only": "npx --yes -p @cloudbase/cli@latest tcb hosting deploy out / -e $TCB_ENV_ID",
+    "tcb:deploy:function": "npm run tcb:deploy:function:only && npm run tcb:route:http",
+    "tcb:deploy:hosting": "npm run tcb:deploy:hosting:only && npm run tcb:route:http",
+    "tcb:deploy": "npm run tcb:prepare && npm run tcb:build && npm run tcb:deploy:function:only && npm run tcb:deploy:hosting:only && npm run tcb:route:http"
+  },
+  "dependencies": {
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.16.0",
+    "next": "16.3.0-canary.26",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "serve": "^14.2.6",
+    "tailwindcss": "3.4.17"
+  }
+}

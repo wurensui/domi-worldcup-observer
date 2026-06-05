@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DOMI">
+  <rect width="64" height="64" fill="#10130f"/>
+  <rect x="8" y="8" width="48" height="48" fill="none" stroke="#c8a45d" stroke-width="2"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Georgia, Times New Roman, serif" font-size="27" fill="#fffdf8">D</text>
+</svg>

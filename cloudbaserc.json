@@ -1,0 +1,16 @@
+{
+  "envId": "your-cloudbase-env-id",
+  "functionRoot": "./functions",
+  "functions": [
+    {
+      "name": "domiReservations",
+      "type": "HTTP",
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "timeout": 10,
+      "memorySize": 256,
+      "installDependency": true,
+      "isWaitInstall": true
+    }
+  ]
+}
